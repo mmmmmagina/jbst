@@ -1,1 +1,11 @@
 /bin
+.classpath
+.project
+.cache
+*.class
+*.log
+.settings/
+.history/
+*.swp
+.gradle/
+/build
