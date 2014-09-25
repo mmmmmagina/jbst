@@ -1,11 +1,8 @@
 /bin
 .classpath
+target
+.settings
 .project
-.cache
 *.class
 *.log
-.settings/
-.history/
 *.swp
-.gradle/
-/build
