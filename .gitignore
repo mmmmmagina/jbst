@@ -6,3 +6,4 @@ target
 *.class
 *.log
 *.swp
+/build
