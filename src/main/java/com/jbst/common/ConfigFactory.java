@@ -2,7 +2,7 @@
  * NOTE: This class is thread unsafe.
  */
 
-package com.coinport.common;
+package com.jbst.common;
 
 import java.io.InputStream;
 import java.io.FileInputStream;

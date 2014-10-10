@@ -1,5 +1,5 @@
 
-package com.coinport.common;
+package com.jbst.common;
 
 import com.google.gson.*;
 import com.google.gson.JsonDeserializer;

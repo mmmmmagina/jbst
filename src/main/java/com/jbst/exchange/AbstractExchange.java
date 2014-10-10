@@ -1,24 +1,16 @@
-package com.coinport.exchange;
+package com.jbst.exchange;
 
 public class AbstractExchange {
 
 	private String accessKey;
 	private String secureKey;
+	private String clientId;
 
 	public String getAccessKey() {
 		return accessKey;
 	}
 
-	public void setAccessKey(String accessKey) {
-		this.accessKey = accessKey;
-	}
-
 	public String getSecureKey() {
 		return secureKey;
 	}
-
-	public void setSecureKey(String secureKey) {
-		this.secureKey = secureKey;
-	}
-
 }
