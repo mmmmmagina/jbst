@@ -18,6 +18,9 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 public class Util {
 
@@ -26,6 +29,7 @@ public class Util {
 	public static String HMAC_SHA1_ALGORITHM = "HmacSHA1";
 	public static String HMAC_SHA256_ALGORITHM = "HmacSHA256";
 	public static String HMAC_SHA512_ALGORITHM = "HmacSHA512";
+	public static Gson gson = new Gson();
 
 	public static Optional<String> md5(String src) {
 		try {
@@ -82,4 +86,9 @@ public class Util {
 		return new BigDecimal(src).setScale(len, BigDecimal.ROUND_HALF_UP)
 			.doubleValue();
 	}
+	
+	public static JsonElement stringToGson(String src) {
+		return new JsonParser().parse(src);
+	}
+	
 }

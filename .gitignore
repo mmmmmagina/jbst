@@ -6,4 +6,5 @@ target
 *.class
 *.log
 *.swp
+/.gradle
 /build
