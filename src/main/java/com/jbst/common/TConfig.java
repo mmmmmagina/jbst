@@ -1,11 +1,11 @@
 package com.jbst.common;
 
 public class TConfig {
-	// common flag put here
-	public String serviceName;
+    // common flag put here
+    public String serviceName;
 
-	public TConfig() {
-		// default value
-		serviceName = "config";
-	}
+    public TConfig() {
+        // default value
+        serviceName = "config";
+    }
 }

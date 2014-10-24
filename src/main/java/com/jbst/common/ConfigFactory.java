@@ -27,7 +27,8 @@ public class ConfigFactory {
             configInput = new FileInputStream(configFile);
             return getConfigFromStream(clazz, configInput);
         } catch (Exception e) {
-            throw new IllegalArgumentException("failed to load config with file: " + configFile, e);
+            throw new IllegalArgumentException(
+                "failed to load config with file: " + configFile, e);
         } finally {
             IOUtils.closeQuietly(configInput);
         }
@@ -35,20 +36,24 @@ public class ConfigFactory {
 
     public static <T> T getConfigFromResource(Class<T> clazz, String configFile) {
         logger.info(logDelimiter);
-        try (InputStream in = ConfigFactory.class.getClassLoader().getResourceAsStream(configFile)) {
-            String realPath = ConfigFactory.class.getClassLoader().getResource(configFile).getPath();
+        try (InputStream in = ConfigFactory.class.getClassLoader()
+            .getResourceAsStream(configFile)) {
+            String realPath = ConfigFactory.class.getClassLoader()
+                .getResource(configFile).getPath();
             logger.info("load config from file: {}", realPath);
             return getConfigFromStream(clazz, in);
         } catch (Exception e) {
-            throw new IllegalArgumentException("failed to load config with file: " + configFile, e);
+            throw new IllegalArgumentException(
+                "failed to load config with file: " + configFile, e);
         }
     }
 
-    private static <T> T getConfigFromStream(Class<T> clazz, InputStream configInput) throws Exception {
+    private static <T> T getConfigFromStream(Class<T> clazz,
+        InputStream configInput) throws Exception {
         Gson gson = new Gson();
         try {
             String configStr = IOUtils.toString(configInput);
-//			logger.info("config file content: \n" + configStr);
+            // logger.info("config file content: \n" + configStr);
             logger.info(logDelimiter);
             return gson.fromJson(configStr, clazz);
         } catch (JsonSyntaxException e) {

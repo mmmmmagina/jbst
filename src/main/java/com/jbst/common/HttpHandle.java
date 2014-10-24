@@ -16,9 +16,11 @@ public class HttpHandle {
     private static HttpHandle threadPoolService = new HttpHandle();
 
     private HttpHandle() {
-        this.threadPoolExecutor = new ThreadPoolExecutor(20, 30, 500, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<Runnable>(), new ThreadPoolExecutor.CallerRunsPolicy());
-        this.completionService = new ExecutorCompletionService<Object>(this.threadPoolExecutor);
+        this.threadPoolExecutor = new ThreadPoolExecutor(20, 30, 500,
+            TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(),
+            new ThreadPoolExecutor.CallerRunsPolicy());
+        this.completionService = new ExecutorCompletionService<Object>(
+            this.threadPoolExecutor);
     }
 
     public static HttpHandle getInstance() {
