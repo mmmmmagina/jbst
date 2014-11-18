@@ -1,0 +1,29 @@
+# json format
+{
+    defaultCheckMask : 7,
+
+    maxAccessInterval : 100,
+
+    accessTimeThreshold : 10000,
+
+    rules : [
+        {
+            name : "A",
+            interval : 60,
+            caps : 30,
+            ruleNumber : 1
+        },
+        {
+            name : "B",
+            interval : 600,
+            caps : 60,
+            ruleNumber : 2
+        },
+        {
+            name : "C",
+            interval : 3600,
+            caps : 100,
+            ruleNumber : 4
+        }
+    ],
+}
