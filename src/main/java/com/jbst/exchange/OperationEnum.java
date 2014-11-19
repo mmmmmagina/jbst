@@ -1,5 +1,5 @@
 package com.jbst.exchange;
 
-public enum Operation {
+public enum OperationEnum {
     Buy, Sell
 }

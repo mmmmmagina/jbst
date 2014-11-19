@@ -1,5 +1,7 @@
 package com.jbst.exchange;
 
+import java.util.HashMap;
+
 import com.google.common.base.Optional;
 
 //(TODO) xiaolu : unfinished
@@ -11,7 +13,7 @@ public class Btc38Exchange extends AbstractExchange {
     }
 
     @Override
-    public String getDepthUrl(Currency inCurrency, Currency outCurrency,
+    public String getDepthUrl(CurrencyEnum inCurrency, CurrencyEnum outCurrency,
         int bidLen, int askLen) {
         return new StringBuilder()
             .append("http://api.btc38.com/v1/depth.php?c=")
@@ -26,23 +28,28 @@ public class Btc38Exchange extends AbstractExchange {
     }
 
     @Override
-    public boolean submitOrder(Currency in, Currency out,
+    public SubmitOrderResult submitOrder(CurrencyEnum in, CurrencyEnum out,
         Optional<Double> price, Double amount) {
+        return new SubmitOrderResult("failed", 0L);
+    }
+
+    @Override
+    public boolean cancelOrder(String id, Optional<CurrencyEnum> in,
+        Optional<CurrencyEnum> out) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean cancelOrder(String id, Optional<Currency> in,
-        Optional<Currency> out) {
+    public boolean queryOrder(String id, Optional<CurrencyEnum> in,
+        Optional<CurrencyEnum> out) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean queryOrder(String id, Optional<Currency> in,
-        Optional<Currency> out) {
+    public HashMap<String, String> addSignInfo(HashMap<String, String> src) {
         // TODO Auto-generated method stub
-        return false;
+        return null;
     }
 }

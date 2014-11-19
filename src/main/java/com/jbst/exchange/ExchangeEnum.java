@@ -1,5 +1,5 @@
 package com.jbst.exchange;
 
-public enum Exchange {
+public enum ExchangeEnum {
     Btc38, OkcoinCn, Bter, Huobi, OkcoinEn
 }

@@ -1,5 +1,5 @@
 package com.jbst.exchange;
 
-public enum Currency {
+public enum CurrencyEnum {
     Cny, Btc, Doge, Ltc, Btsx
 }

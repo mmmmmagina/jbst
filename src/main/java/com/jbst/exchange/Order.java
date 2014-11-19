@@ -5,7 +5,7 @@ import com.google.common.base.Optional;
 public class Order {
     
     private String id;
-    private Operation op;
+    private OperationEnum op;
     private Optional<Double> price;
     private double amount;
     private double dealedAmount;

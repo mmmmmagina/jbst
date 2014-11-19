@@ -1,7 +1,7 @@
 package com.jbst.exchange;
 
-import com.sun.javafx.collections.MappingChange.Map;
+import java.util.Map;
 
 public class Account {
-    private Map<Currency, Asset> assets;
+    private Map<CurrencyEnum, Asset> assets;
 }

@@ -6,19 +6,19 @@ import com.google.common.base.Optional;
 
 public interface IExchange {
 
-    public Depth getDepth(Currency inCurrency, Currency outCurrency,
+    public Depth getDepth(CurrencyEnum inCurrency, CurrencyEnum outCurrency,
         int bidLen, int askLen);
 
     public Account getAccountInfo();
 
-    public boolean submitOrder(Currency in, Currency out,
+    public SubmitOrderResult submitOrder(CurrencyEnum in, CurrencyEnum out,
         Optional<Double> price, Double amount);
 
-    public boolean cancelOrder(String id, Optional<Currency> in,
-        Optional<Currency> out);
+    public boolean cancelOrder(String id, Optional<CurrencyEnum> in,
+        Optional<CurrencyEnum> out);
 
-    public boolean queryOrder(String id, Optional<Currency> in,
-        Optional<Currency> out);
+    public boolean queryOrder(String id, Optional<CurrencyEnum> in,
+        Optional<CurrencyEnum> out);
 
     default List<Order> queryAllOpeningOrder() {
         throw new UnsupportedOperationException(
