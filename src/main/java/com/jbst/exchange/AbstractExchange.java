@@ -3,6 +3,7 @@ package com.jbst.exchange;
 import java.util.HashMap;
 
 import com.google.common.base.Optional;
+import com.google.gson.JsonElement;
 import com.jbst.common.HttpRequest;
 import com.jbst.common.Util;
 

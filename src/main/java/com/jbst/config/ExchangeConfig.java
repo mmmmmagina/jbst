@@ -5,10 +5,12 @@
 
 package com.jbst.config;
 
-import com.jbst.exchange.ExchangeEnum;
-import com.jbst.exchange.TradePair;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.jbst.exchange.CurrencyEnum;
+import com.jbst.exchange.ExchangeEnum;
+import com.jbst.exchange.TradePair;
 
 public class ExchangeConfig {
 
@@ -16,9 +18,9 @@ public class ExchangeConfig {
   private ExchangeEnum exType;
   private ArrayList<TradePair> supportedMarket;
   private HashMap<TradePair, Double> minExchangeAmount;
-  private HashMap<Currency, Double> withdrawalFee;
+  private HashMap<CurrencyEnum, Double> withdrawalFee;
   private String accessKey;
   private String secretKey;
-  private HashMap<Currency, String> depositAddress;
+  private HashMap<CurrencyEnum, String> depositAddress;
 
 }
