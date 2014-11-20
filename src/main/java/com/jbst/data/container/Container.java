@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Optional;
 import com.jbst.exchange.CurrencyEnum;
@@ -24,18 +26,13 @@ public class Container {
     public static Container container = new Container();
     
     private Container() {
-        System.out.println("fuck here");
         supportedDepth.add(ExchangeEnum.OkcoinCn);
         supportedDepth.add(ExchangeEnum.Huobi);
 
-        System.out.println("fuck heare 2");
-        System.out.println(supportedDepth);
         // init depth
         for (ExchangeEnum ex : supportedDepth) {
-            System.out.println("fuck heare 3");
             Depth d = ExchangeFactory.getExchange(ex).getDepth(
                 CurrencyEnum.Btc, CurrencyEnum.Cny);
-            System.out.println("fuck heare 4");
             depths.put(ex, d);
         }
         updateMergedDepth();
@@ -46,29 +43,35 @@ public class Container {
     }
     
     public void updateDepths(ExchangeEnum ex, Depth d) {
-        System.out.println("=========== before update depth ===========");
-        System.out.println(depths);
-        System.out.println(mergedDepth);
         depths.put(ex, d);
         updateMergedDepth();
-        System.out.println("=========== after update depth ===========");
-        System.out.println(depths);
-        System.out.println(mergedDepth);
     }
 
     private void updateMergedDepth() {
         Set<ExchangeEnum> keys = depths.keySet();
+        
         for (Iterator<ExchangeEnum> iterator = keys.iterator(); iterator
             .hasNext();) {
             ExchangeEnum ex = (ExchangeEnum) iterator.next();
             Depth d = depths.get(ex);
+            Predicate<DepthItem> predicate = (s) -> s.getExchange().get() != ex;
+            
+            List<DepthItem> updatedBids = new ArrayList<DepthItem>();
+            List<DepthItem> updatedAsks = new ArrayList<DepthItem>();
+            if (mergedDepth.getBids() != null) {
+                updatedBids = mergedDepth.getBids().stream().filter(predicate).collect(Collectors.toList());    
+            }
+            if (mergedDepth.getAsks() != null) {
+                updatedAsks = mergedDepth.getAsks().stream().filter(predicate).collect(Collectors.toList());
+            }
+
             for (DepthItem di : d.getBids()) {
                 // TODO(xiaolu) update raw price according the exchange and
                 // withdraw Fee
                 DepthItem updated = new DepthItem(di.getPrice(),
                     di.getRawPrice(), di.getQuantity(), Optional.of(ex),
                     Optional.of(System.currentTimeMillis()));
-                mergedDepth.getBids().add(updated);
+                updatedBids.add(updated);
             }
             for (DepthItem di : d.getAsks()) {
                 // TODO(xiaolu) update raw price according the exchange and
@@ -76,8 +79,11 @@ public class Container {
                 DepthItem updated = new DepthItem(di.getPrice(),
                     di.getRawPrice(), di.getQuantity(), Optional.of(ex),
                     Optional.of(System.currentTimeMillis()));
-                mergedDepth.getAsks().add(updated);
+                updatedAsks.add(updated);
             }
+            
+            mergedDepth.setBids(new ArrayList<DepthItem>(updatedBids));
+            mergedDepth.setAsks(new ArrayList<DepthItem>(updatedAsks));
 
             // mergedDepth.getAsks().sort(arg0);
             Comparator<DepthItem> comparator = new Comparator<DepthItem>() {

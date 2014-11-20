@@ -2,10 +2,9 @@ package com.jbst.exchange;
 
 import java.util.HashMap;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.base.Optional;
-import com.google.gson.JsonElement;
 import com.jbst.common.HttpRequest;
-import com.jbst.common.Util;
 
 public abstract class AbstractExchange implements IExchange {
 
@@ -38,7 +37,8 @@ public abstract class AbstractExchange implements IExchange {
         int bidLen, int askLen) {
         String res = HttpRequest.sendGetRequest(
             getDepthUrl(inCurrency, outCurrency, bidLen, askLen), 10000);
-        return Util.gson.fromJson(res, Depth.class);
+        JsonDepth jsonDepth = JSON.parseObject(res, JsonDepth.class);
+        return jsonDepth.toDepth();
     }
 
     public Depth getDepth(CurrencyEnum inCurrency, CurrencyEnum outCurrency) {
@@ -47,10 +47,12 @@ public abstract class AbstractExchange implements IExchange {
 
     public abstract String getDepthUrl(CurrencyEnum inCurrency,
         CurrencyEnum outCurrency, int bidLen, int askLen);
-    
-    public abstract HashMap<String, String> addSignInfo(HashMap<String, String> src);
-    
-    protected <T> T apiE2EFlow(String url, HashMap<String, String> postParams, Class<T> clazz) {
+
+    public abstract HashMap<String, String> addSignInfo(
+        HashMap<String, String> src);
+
+    protected <T> T apiE2EFlow(String url, HashMap<String, String> postParams,
+        Class<T> clazz) {
         String res;
         postParams = addSignInfo(postParams);
         if (!postParams.isEmpty()) {
@@ -58,7 +60,7 @@ public abstract class AbstractExchange implements IExchange {
         } else {
             res = HttpRequest.sendGetRequest(url, 10000);
         }
-        return Util.gson.fromJson(res, clazz);
+        return JSON.parseObject(res, clazz);
     }
 
 }
