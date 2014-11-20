@@ -28,12 +28,21 @@ public class DepthCrawler extends AbstractScheduledService {
         }
         logger.info("================ after update ================");
         logger.info(container.mergedDepth.toString());
+        
+        // check the depth
+        arbitrage(container.mergedDepth);
 
     }
 
     @Override
     protected Scheduler scheduler() {
         return Scheduler.newFixedRateSchedule(0, 10, TimeUnit.SECONDS);
+    }
+    
+    private void arbitrage(Depth d) {
+        if (d.getBids().get(0).getPrice() > d.getAsks().get(0).getPrice()) {
+            //submit order to buy and sell
+        }
     }
 
     public static void main(String[] args) {
