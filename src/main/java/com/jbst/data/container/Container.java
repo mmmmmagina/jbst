@@ -90,15 +90,16 @@ public class Container {
                 @Override
                 public int compare(DepthItem d1, DepthItem d2) {
                     if (d1.getPrice() > d2.getPrice())
-                        return 1;
-                    else if (d1.getPrice() < d2.getPrice())
                         return -1;
+                    else if (d1.getPrice() < d2.getPrice())
+                        return 1;
                     else
                         return 0;
                 }
             };
             Collections.sort(mergedDepth.getBids(), comparator);
-            Collections.sort(mergedDepth.getAsks(), comparator);
+            Collections.sort(mergedDepth.getAsks(), comparator.reversed());
+            
         }
     }
 }

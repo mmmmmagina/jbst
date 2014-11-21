@@ -105,7 +105,8 @@ public class HuobiExchange extends AbstractExchange {
     @Override
     public HashMap<String, String> addSignInfo(HashMap<String, String> src) {
         src.put("secret_key", getSecureKey());
-        String sign = Util.md5(Util.combineToEncryptParams(src)).get();
+        System.out.println(Util.combineToEncryptParams(src));
+        String sign = Util.md5(Util.combineToEncryptParams(src)).get().toLowerCase();
         src.put("sign", sign);
         return src;
     }

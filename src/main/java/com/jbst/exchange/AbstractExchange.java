@@ -60,6 +60,7 @@ public abstract class AbstractExchange implements IExchange {
         } else {
             res = HttpRequest.sendGetRequest(url, 10000);
         }
+        System.out.println(res);
         return JSON.parseObject(res, clazz);
     }
 

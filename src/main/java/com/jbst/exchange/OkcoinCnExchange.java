@@ -78,8 +78,9 @@ public class OkcoinCnExchange extends AbstractExchange {
 
     @Override
     public HashMap<String, String> addSignInfo(HashMap<String, String> src) {
-        String sign = Util.md5(Util.combineToEncryptParams(src) + getSecureKey()).get();
+        String sign = Util.md5(Util.combineToEncryptParams(src) + "&secret_key=" + getSecureKey()).get();
         src.put("sign", sign);
         return src;
     }
+    
 }
